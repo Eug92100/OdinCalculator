@@ -5,26 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Eug's Calculator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" type="text/css" media="screen" href="normalize.css" />-->
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
 </head>
 <body>
-    <div class = "screen"></div>
-    <div class = "buttons">
-        <button value="0">0</button>
-        <button value="1">1</button>
-        <button value="2">2</button>
-        <button value="3">3</button>
-        <button value="4">4</button>
-        <button value="5">5</button>
-        <button value="6">6</button>
-        <button value="7">7</button>
-        <button value="8">8</button>
-        <button value="9">9</button>
-        <button value="plus">+</button>
-        <button value="minus">-</button>
-        <button value="times">x</button>
-        <button value="equals">=</button>
+    <div class="calculator">
+        <div class = "screen">9+8</div>
+            <div class = "buttons">
+                <div class = "numbers">
+                    <div class = "first">
+                        <button  id="1">1</button>
+                        <button  id="2">2</button>
+                        <button  id="3">3</button>
+                    </div>
+                    <div class = "second">
+                        <button  id="4">4</button>
+                        <button  id="5">5</button>
+                        <button  id="6">6</button>
+                    </div>
+                    <div class = "third">
+                        <button  id="7">7</button>
+                        <button id="8">8</button>
+                        <button id="9">9</button>
+                        <button  id="0">0</button>
+                    </div>
+                </div>
+                <div class = "operators">
+                    <button id="plus">+</button>
+                    <button id="minus">-</button>
+                    <button id="times">x</button>
+                    <button id="divided">/</button>
+                    <button id="equals">=</button>
+                    <button id="clear">Clear</button>
+                </div>
+        </div>
     </div>
 </body>
 </html>
