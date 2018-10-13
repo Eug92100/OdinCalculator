@@ -4,7 +4,7 @@ body{
 .calculator{
     position: absolute;
     top: 50px;
-    right: 33%;
+    right: 40%;
 }
 .screen{
     display: flex;

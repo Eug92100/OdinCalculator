@@ -1,5 +1,6 @@
 const screen = document.querySelector(".screen");
 const buttons = Array.from(document.querySelectorAll("button"));
+var displayed = "";
 
 
 function add (a,b) {
@@ -69,3 +70,10 @@ function operate (nb1, operator, nb2){
         return "ERROR"
     }
 }
+
+buttons.forEach((button) => {
+	button.addEventListener("click", function(e){
+		displayed += e.target.value;
+		screen.textContent = displayed;
+	});
+});
