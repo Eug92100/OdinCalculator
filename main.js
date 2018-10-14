@@ -10,7 +10,7 @@ function add (a,b) {
 	return a + b;
 }
 
-function subtract (a,b) {
+function substract (a,b) {
 	return a - b;
 }
 
@@ -29,14 +29,6 @@ function sum (s) {
 function multiply(a,b){
     return a*b;
 }
-// function multiply (m) {
-// 	total = 1;
-// 	for (var i = 0; i < m.length; i++) {
-// 		total *= m[i];
-// 	}
-// 	return total
-		
-// }
 
 function divide (a,b) {
     return a/b;
@@ -75,26 +67,28 @@ function operate (nb1, operator, nb2){
 }
 
 
-buttons.forEach((button) => {
-	button.addEventListener("click", function(e){
-	if(nbs == [""]){
-		displayed="";
-	}
-	if(e.target.value!== "clear" && e.target.value!== "equals"){
-		displayed += e.target.value;
-		var str = e.target.value;//storing the string so i can use the function charCodeAt
+function buttonClick(target){
+	if(target.value!== "clear" && target.value!== "equals"){
+		//get rid of the displayed past result
+		if(nbs ==  0 && operators.length == 0){
+			displayed = target.value;
+		} else {
+		displayed += target.value;}
+		var str = target.value;//storing the string so i can use the function charCodeAt
+
+		//Storing the input value in one of the two arrays
 		if(str.charCodeAt(0)>47 && str.charCodeAt(0)<58){
-			nbs[i] += e.target.value;	//creating a string that's going to be the input number
+			nbs[i] += target.value;	
 		} else {
 			operators[i]="";
-			operators[i] += e.target.value;
-			++i; //so next time a number is clicked on a new string is created and stored in the array nbs
+			operators[i] += target.value;
+			++i; 
 			nbs[i] = "";	
 		}
-
 			
 	}else{
-		if(e.target.value == "equals"){
+	//action for Clear and = buttons
+		if(target.value == "equals"){
 			while(i>=0){
 				nbs[i]= parseInt(nbs[i]);
 				i--;
@@ -105,11 +99,14 @@ buttons.forEach((button) => {
 		}
 		nbs = [""];
 		operators = [];
-		i = 0;
+		i=0;
 	}
-	console.log(operators);
 	screen.textContent = displayed;
 		
 		
-	});
-});
+};
+
+
+
+buttons.forEach((button) => {
+	button.addEventListener("click", (e) => buttonClick(e.target) )});
