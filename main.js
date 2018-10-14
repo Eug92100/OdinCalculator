@@ -66,6 +66,19 @@ function operate (nb1, operator, nb2){
     }
 }
 
+function operations (nums, operators){
+	var subNums ;
+	var subOperators ;
+	var parIndex = [operators.indexOf("("),operators.indexOf(")")];
+	if (parIndex[0]!==-1 && parIndex[1]!==-1){
+		subNums = nums.splice(parIndex[0]+1,parIndex[1]);
+		subOperators = operators.splice(parIndex[0],parIndex[1], "*");
+		parIndex = [operators.indexOf("("),operators.indexOf(")")];
+		console.log(parIndex);
+	} 
+		return [subNums,subOperators];
+}
+
 
 function buttonClick(target){
 	if(target.value!== "clear" && target.value!== "equals"){
