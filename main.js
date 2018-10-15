@@ -66,18 +66,23 @@ function operate (nb1, operator, nb2){
     }
 }
 
-function operations (nums, operators){
-	var subNums ;
-	var subOperators ;
+function parenthesis(nums, operators){
+	var subNums =[""];
+	var subOperators = [""];
 	var parIndex = [operators.indexOf("("),operators.indexOf(")")];
-	if (parIndex[0]!==-1 && parIndex[1]!==-1){
-		subNums = nums.splice(parIndex[0]+1,parIndex[1]);
-		subOperators = operators.splice(parIndex[0],parIndex[1], "*");
+	var i = 0;
+	while (parIndex[0]!==-1 && parIndex[1]!==-1){
+		subNums [i] = nums.splice(parIndex[0],parIndex[1]);
+		//replace to keep the index right and keep in mind where the parenthesis were
+		subOperators [i] = operators.splice(parIndex[0],parIndex[1]-parIndex[0]+1,",");
 		parIndex = [operators.indexOf("("),operators.indexOf(")")];
-		console.log(parIndex);
+		i++;
+		console.log(subNums);
+		console.log(subOperators);
 	} 
 		return [subNums,subOperators];
 }
+
 
 
 function buttonClick(target){
@@ -106,6 +111,7 @@ function buttonClick(target){
 				nbs[i]= parseInt(nbs[i]);
 				i--;
 			}
+			
 			displayed = operate(nbs[0],operators[0],nbs[1]);
 		} else {	
 			displayed = "";
