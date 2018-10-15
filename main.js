@@ -34,6 +34,8 @@ function divide (a,b) {
     return a/b;
 }
 
+
+//in case I want to add the power and factorial to my calculator
 function power(a,b) {
 	var total = 1;
 	for(var i = 0; i < b; i++){
@@ -71,7 +73,7 @@ function operationRules(nums, operators){
 	//making the function works with negative numbers
 	var minusIndex = operators.indexOf("-");
 	console.log(nums[minusIndex]);
-	if(isNaN(nums[minusIndex])) {
+	if(minusIndex!== -1 && isNaN(nums[minusIndex])) {
 		console.log(nums);
 		nums[minusIndex+1] = Number("-"+nums[minusIndex+1]);
 		nums.splice(minusIndex,1);
@@ -94,6 +96,7 @@ function operationRules(nums, operators){
 		divIndex = operators.indexOf("/");
 		timesIndex = operators.indexOf("x");
 	}
+	// then it goes from left to right
 	while (operators.length > 0){
 		nums.splice(0, 2, operate(nums[0],operators[0],nums[1]));
 		operators.splice(0, 1);
@@ -101,7 +104,7 @@ function operationRules(nums, operators){
 	return nums
 }
 
-
+// in case of parenthesis, calculate first what inside
 function parenthesis(nums, operators){
 	var parIndex = [operators.indexOf("("),operators.indexOf(")")];
 	var i = 0;
@@ -126,7 +129,9 @@ function buttonClick(target){
 			displayed = target.textContent;
 		} else {
 		displayed += target.textContent;}
-		var str = target.value;//storing the string so i can use the function charCodeAt
+
+		//storing the string so i can use the function charCodeAt
+		var str = target.value;
 
 		//Storing the input value in one of the two arrays
 		if(str.charCodeAt(0)>47 && str.charCodeAt(0)<58){
