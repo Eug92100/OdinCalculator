@@ -57,7 +57,7 @@ function operate(nb1, operator, nb2){
         return add(nb1,nb2);
     } else if (operator == "-"){
         return substract(nb1,nb2);
-    } else if (operator == "x"){
+    } else if (operator == "*"){
         return multiply(nb1,nb2);
     } else if (operator == "/"){
         return divide(nb1, nb2);
@@ -68,6 +68,17 @@ function operate(nb1, operator, nb2){
 
 
 function operationRules(nums, operators){
+	//making the function works with negative numbers
+	var minusIndex = operators.indexOf("-");
+	console.log(nums[minusIndex]);
+	if(isNaN(nums[minusIndex])) {
+		console.log(nums);
+		nums[minusIndex+1] = Number("-"+nums[minusIndex+1]);
+		nums.splice(minusIndex,1);
+		operators.splice(minusIndex,1);
+		console.log(operators);
+	}
+	//making sure that divisions and multiplications are done first
 	var timesIndex = operators.indexOf("x");
 	var divIndex = operators.indexOf("/");
 	while (timesIndex!==-1 || divIndex!==-1){
@@ -92,15 +103,13 @@ function operationRules(nums, operators){
 
 
 function parenthesis(nums, operators){
-	var subNums =[""];
-	var subOperators = [""];
 	var parIndex = [operators.indexOf("("),operators.indexOf(")")];
 	var i = 0;
 	while (parIndex[0]!==-1 && parIndex[1]!==-1){
 		var result = operationRules(nums.splice(parIndex[0]+1,parIndex[1]-parIndex[0]),operators.splice(parIndex[0]+1,parIndex[1]-parIndex[0]-1));
-		nums.splice(parIndex[0], 2, result);
-		console.log(nums);
+		nums.splice(parIndex[0], 2, result[0]);
 		operators.splice(parIndex[0],2);
+		console.log(operators);
 		parIndex = [operators.indexOf("("),operators.indexOf(")")];
 		i++;
 		
@@ -114,9 +123,9 @@ function buttonClick(target){
 	if(target.value!== "clear" && target.value!== "equals"){
 		//get rid of the displayed past result
 		if(nbs ==  0 && operators.length == 0){
-			displayed = target.value;
+			displayed = target.textContent;
 		} else {
-		displayed += target.value;}
+		displayed += target.textContent;}
 		var str = target.value;//storing the string so i can use the function charCodeAt
 
 		//Storing the input value in one of the two arrays
