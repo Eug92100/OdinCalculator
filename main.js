@@ -52,7 +52,7 @@ function factorial(a) {
 }
 
 
-function operate (nb1, operator, nb2){
+function operate(nb1, operator, nb2){
     if(operator == "+"){
         return add(nb1,nb2);
     } else if (operator == "-"){
@@ -62,9 +62,34 @@ function operate (nb1, operator, nb2){
     } else if (operator == "/"){
         return divide(nb1, nb2);
     } else {
-        return "ERROR"
+        return "ERROR";
     }
 }
+
+
+function operationRules(nums, operators){
+	var timesIndex = operators.indexOf("x");
+	var divIndex = operators.indexOf("/");
+	while (timesIndex!==-1 || divIndex!==-1){
+		if(timesIndex > divIndex){
+			var index = timesIndex;
+			var ope = "x";
+		}else {
+			var index = divIndex;
+			var ope = "/"
+		}
+		nums.splice(index, 2, operate(nums[index],ope,nums[index+1]));
+		operators.splice(index, 1);
+		divIndex = operators.indexOf("/");
+		timesIndex = operators.indexOf("x");
+	}
+	while (operators.length > 0){
+		nums.splice(0, 2, operate(nums[0],operators[0],nums[1]));
+		operators.splice(0, 1);
+	}
+	return nums
+}
+
 
 function parenthesis(nums, operators){
 	var subNums =[""];
@@ -72,15 +97,15 @@ function parenthesis(nums, operators){
 	var parIndex = [operators.indexOf("("),operators.indexOf(")")];
 	var i = 0;
 	while (parIndex[0]!==-1 && parIndex[1]!==-1){
-		subNums [i] = nums.splice(parIndex[0],parIndex[1]);
-		//replace to keep the index right and keep in mind where the parenthesis were
-		subOperators [i] = operators.splice(parIndex[0],parIndex[1]-parIndex[0]+1,",");
+		var result = operationRules(nums.splice(parIndex[0]+1,parIndex[1]-parIndex[0]),operators.splice(parIndex[0]+1,parIndex[1]-parIndex[0]-1));
+		nums.splice(parIndex[0], 2, result);
+		console.log(nums);
+		operators.splice(parIndex[0],2);
 		parIndex = [operators.indexOf("("),operators.indexOf(")")];
 		i++;
-		console.log(subNums);
-		console.log(subOperators);
+		
 	} 
-		return [subNums,subOperators];
+		return operationRules(nums,operators);
 }
 
 
@@ -112,7 +137,7 @@ function buttonClick(target){
 				i--;
 			}
 			
-			displayed = operate(nbs[0],operators[0],nbs[1]);
+			displayed = parenthesis(nbs, operators);
 		} else {	
 			displayed = "";
 		}
