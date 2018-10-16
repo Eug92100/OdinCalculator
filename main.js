@@ -62,7 +62,11 @@ function operate(nb1, operator, nb2){
     } else if (operator == "*"){
         return multiply(nb1,nb2);
     } else if (operator == "/"){
-        return divide(nb1, nb2);
+		if(nb2 == 0){
+			return "CAN'T DIVIDE BY 0"
+		}else{
+			return divide(nb1, nb2);
+		}
     } else {
         return "ERROR";
     }
@@ -81,12 +85,12 @@ function operationRules(nums, operators){
 		console.log(operators);
 	}
 	//making sure that divisions and multiplications are done first
-	var timesIndex = operators.indexOf("x");
+	var timesIndex = operators.indexOf("*");
 	var divIndex = operators.indexOf("/");
 	while (timesIndex!==-1 || divIndex!==-1){
 		if(timesIndex > divIndex){
 			var index = timesIndex;
-			var ope = "x";
+			var ope = "*";
 		}else {
 			var index = divIndex;
 			var ope = "/"
@@ -94,7 +98,7 @@ function operationRules(nums, operators){
 		nums.splice(index, 2, operate(nums[index],ope,nums[index+1]));
 		operators.splice(index, 1);
 		divIndex = operators.indexOf("/");
-		timesIndex = operators.indexOf("x");
+		timesIndex = operators.indexOf("*");
 	}
 	// then it goes from left to right
 	while (operators.length > 0){
@@ -152,6 +156,7 @@ function buttonClick(target){
 			}
 			
 			displayed = parenthesis(nbs, operators);
+			displayed = Number.parseFloat(displayed).toPrecision(4);
 		} else {	
 			displayed = "";
 		}
@@ -168,3 +173,8 @@ function buttonClick(target){
 
 buttons.forEach((button) => {
 	button.addEventListener("click", (e) => buttonClick(e.target) )});
+
+window.addEventListener("keydown",function(e){
+	const button = document.querySelector(`button[data-key="${e.keyCode}"]`);
+	console.log(button);
+})
