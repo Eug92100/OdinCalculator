@@ -76,7 +76,6 @@ function operate(nb1, operator, nb2){
 function operationRules(nums, operators){
 	//making the function works with negative numbers
 	var minusIndex = operators.indexOf("-");
-	console.log(nums[minusIndex]);
 	if(minusIndex!== -1 && isNaN(nums[minusIndex])) {
 		nums[minusIndex+1] = Number("-"+nums[minusIndex+1]);
 		nums.splice(minusIndex,1);
