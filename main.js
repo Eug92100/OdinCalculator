@@ -78,11 +78,9 @@ function operationRules(nums, operators){
 	var minusIndex = operators.indexOf("-");
 	console.log(nums[minusIndex]);
 	if(minusIndex!== -1 && isNaN(nums[minusIndex])) {
-		console.log(nums);
 		nums[minusIndex+1] = Number("-"+nums[minusIndex+1]);
 		nums.splice(minusIndex,1);
 		operators.splice(minusIndex,1);
-		console.log(operators);
 	}
 	//making sure that divisions and multiplications are done first
 	var timesIndex = operators.indexOf("*");
@@ -116,7 +114,6 @@ function parenthesis(nums, operators){
 		var result = operationRules(nums.splice(parIndex[0]+1,parIndex[1]-parIndex[0]),operators.splice(parIndex[0]+1,parIndex[1]-parIndex[0]-1));
 		nums.splice(parIndex[0], 2, result[0]);
 		operators.splice(parIndex[0],2);
-		console.log(operators);
 		parIndex = [operators.indexOf("("),operators.indexOf(")")];
 		i++;
 		
@@ -127,7 +124,6 @@ function parenthesis(nums, operators){
 
 
 function buttonClick(target){
-	console.log(target);
 	if(target.value!== "clear" && target.value!== "equals"){
 		//get rid of the displayed past result
 		if(nbs ==  0 && operators.length == 0){
