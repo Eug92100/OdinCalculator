@@ -127,6 +127,7 @@ function parenthesis(nums, operators){
 
 
 function buttonClick(target){
+	console.log(target);
 	if(target.value!== "clear" && target.value!== "equals"){
 		//get rid of the displayed past result
 		if(nbs ==  0 && operators.length == 0){
@@ -175,6 +176,13 @@ buttons.forEach((button) => {
 	button.addEventListener("click", (e) => buttonClick(e.target) )});
 
 window.addEventListener("keydown",function(e){
-	const button = document.querySelector(`button[data-key="${e.keyCode}"]`);
-	console.log(button);
+	var button = [""];
+	if (e.shiftKey == false){
+		button = document.querySelector(`button[data-key = "${e.keyCode}!"]`);
+	} else {
+		button = document.querySelector(`button[data-key = "${e.keyCode}"]`);
+	}
+	if (button !== null) {
+		buttonClick(button);
+	}
 })
