@@ -171,12 +171,8 @@ buttons.forEach((button) => {
 	button.addEventListener("click", (e) => buttonClick(e.target) )});
 
 window.addEventListener("keydown",function(e){
-	var button = [""];
-	if (e.shiftKey == false){
-		button = document.querySelector(`button[data-key = "${e.keyCode}!"]`);
-	} else {
-		button = document.querySelector(`button[data-key = "${e.keyCode}"]`);
-	}
+	var button = document.querySelector(`button[data-key = "${e.key}"]`);
+
 	if (button !== null) {
 		buttonClick(button);
 	}
