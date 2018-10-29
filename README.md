@@ -1,4 +1,5 @@
-<em>From the Odin Project : https://www.theodinproject.com/lessons/calculator </em>
+<em>From the Odin Project : https://www.theodinproject.com/lessons/calculator <br>
+  Find the project here: https://eug92100.github.io/odin_calculator/ </em>
 
 <h2>newMain.js</h2>
 <p>In this version, I used the function eval() which interprets a code statement.
